@@ -1,14 +1,15 @@
 # Machine Learning and the rest
 
-Description: A cheatsheet, describe alogithms and methods used in Machine Learning
-Written By: Ewelina Kaminska
-Contact Information: 
-Last Updated: 29.05.2022
-Machine learning Pipeline and it's R&D nature
+Description: A cheatsheet, describe alogithms and methods used in Machine Learning \
+Written By: Ewelina Kaminska \
+Contact Information:  \
+Last Updated: 29.05.2022 \
+Machine learning Pipeline and it's R&D nature \
 
 
 # Define problem
-Define needs, possibilities, requirements, acceptance criteria (min, mid, max), benefits of project, risks if it won't work, priorities, possible data, inputs and outputs, what to monitor, what is crutial to monitor in the future, how to implment model within application functions
+Define needs, possibilities, requirements, acceptance criteria (min, mid, max), benefits of project, risks if it won't work, priorities, possible data, inputs and outputs, what to monitor, what is crutial to monitor in the future, how to implment model within application functions \
+
 product owner, business analyst, data scientist to evaluate what is possible to model
 
 # Gather data
@@ -26,6 +27,8 @@ data engineer, business analyst
 ### Correlation
 ### Missing values
 ### Outliers
+#### Transformation
+- log
 #### Isolation forest
 
 ## Preprocessing
@@ -48,48 +51,8 @@ data engineer, business analyst
 ### Environement:
 - spark, jupyter,
 
-## Supervised learning
-### Regression
-#### Linear regression
-#### Decision trees for regression
-
-## Classification
-### SVM
-### Logistic regression
-### Tress based:
-#### Decision tree
-#### Random forest
-#### XGBoost
-#### Ada Boost
-### Neural Network based:
-#### Percpetron
-#### CNN
-#### RNN
-
-## Unsupervised learning
-### Clustering
-#### K-means
-#### DBSCAN
-#### Hierarchical clustering
-
-### Anomaly detection
-### Recommendation engines
-
-## Optimisation
-### Gradient descent
-### Metaheuristics
-#### Genetic algorithm
-#### PSO
-#### Memetic algorithm
-#### CMA-ES
-### Hyperparameters optimisation
-- Optuna
-- Hyperopt
-
-## Other algorithms
-### Text mining
-### Image mining
-
+## Present results
+https://www.canva.com/design/DAFCeoGtdtc/Y56Qoq91Ehtuv1WHwL6Vzg/edit?utm_content=DAFCeoGtdtc&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 
 # Preparing for production
 - data pipeline
