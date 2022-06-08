@@ -1,16 +1,14 @@
-# Machine Learning Algorithms
+# Supervised Learning
+# Regression
+## Linear regression
+## Decision trees for regression
 
-## Supervised learning
-### Regression
-#### Linear regression
-#### Decision trees for regression
+# Classification
+## SVM
+## Logistic regression
 
-## Classification
-### SVM
-### Logistic regression
-
-### Tress based:
-#### Decision tree
+## Tress based:
+### Decision tree
 Decision Trees is a type of model which breaks down the given input data through decision, based on the features we train the model and their values. 
 Training part is respnsible for finding questions (features and split values) that best separate training data into target classes. 
 
@@ -21,7 +19,7 @@ Training part is respnsible for finding questions (features and split values) th
 As you can imagine this process is prone to overfitting as it can result in a very deep tree with many nodes (one leaf per observation).
 The typical approach to remedy this is by pruning the tree to prevent overfitting. The pruning process is quite simple in most scenarios, the easiest way would be to set a limit on the maximum depth of the tree.
 
-##### Hyperparameters:
+#### Hyperparameters:
 for sklearn.tree.DecisionTreeClassifier
 - criterion 
     - Gini impurity = 1 - sum of (squared probability of samples belonging to class i at a given node - p^2) -> 0 for pure node, ~0.5 for super impure
@@ -52,22 +50,21 @@ for sklearn.tree.DecisionTreeClassifier
     - Complexity parameter used for Minimal Cost-Complexity Pruning. The subtree with the largest cost complexity that is smaller than ccp_alpha will be chosen. By default, no pruning is performed 
     - https://scikit-learn.org/stable/modules/tree.html#minimal-cost-complexity-pruning
 
-
- ##### PROS
+#### PROS
 - easy to interpret
 - clear decision path
 - no need for normalisation, scaling, deleting outliers
 - fit to nonlinear problems
 - we can see which features are most important for decision making process
 
-##### CONS
+#### CONS
 - overfitting
 - not do well on unbalanced data
 - high variance, small change in data can result in a large change in the structure of the tree and decisions being made
 - calculation time increases drastically with the number of classes and size of the data set
 
 
-#### Random forest
+### Random forest
 Random forest is an ensemble of decision trees. Ensemble learning is a method which uses multiple learning algorithms to boost predictive performance. This method will allow a better generalization of the model and is less prone to overfitting.
 
 #### Algorithm
@@ -78,7 +75,7 @@ Random forest is an ensemble of decision trees. Ensemble learning is a method wh
 5. Repeat the steps 1 to 2 k times to grow k tress in the forest.
 6. Prediction are made based on voting from all trees in the forest - Bagging or Bootstrap Aggregation 
 
-##### Hyperparameters:
+#### Hyperparameters:
 for sklearn.ensemble.RandomForestClassifier
 - number of trees in the forest
 - bootstrap
@@ -93,47 +90,21 @@ for sklearn.ensemble.RandomForestClassifier
 - criterion, max depth, min samples split, min_samples_leaf, min_weight_fraction_leaf, max_features, max_leaf_nodes, min_impurity_decrease, class_weight, ccp_alpha
     - like in decision trees
 
- ##### PROS
+ #### PROS
 - unlikely to overfit data
 - no need for normalisation, scaling, deleting outliers
 - fit to nonlinear problems
 - we can see which features are most important for decision making process
 
-##### CONS
+#### CONS
 - not do well on unbalanced data
 - calculation time increases drastically with the number of classes and size of the data set
 - harder to interpret
 
 
-#### XGBoost
-#### Ada Boost
-### Neural Network based:
-#### Percpetron
-#### CNN
-#### RNN
-
-## Unsupervised learning
-### Clustering
-#### K-means
-#### DBSCAN
-#### Hierarchical clustering
-
-### Anomaly detection
-### Recommendation engines
-
-## Optimisation
-### Gradient descent
-### Metaheuristics
-#### Genetic algorithm
-#### PSO
-#### Memetic algorithm
-#### CMA-ES
-### Hyperparameters optimisation
-- Optuna
-- Hyperopt
-
-## Other algorithms
-### Text mining
-### Image mining
-
-
+### XGBoost
+### Ada Boost
+## Neural Network based:
+### Percpetron
+### CNN
+### RNN
