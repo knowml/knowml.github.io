@@ -19,11 +19,10 @@ Support Vector Machine wants the smallest distance between data points and the d
     - it't the regularisation part - sum of squared parameters
     - we have parameters * values -> for it to be > 1 or < -1:
         - we say that parameters * values is a projection of parameters matrix transposed on x vector - dot product
-        - we can write it as projection * ||parameters||, so if projections (margins) are small, then parameters need to be high and cost funtion will be high
+        - we can write it as projection * lengh of parameters vector, so if projections (margins) are small, then parameters need to be high and cost funtion will be high
 
 #### Hyperparameters
 for sklearn.svm.LinearSVC, SVC
-intercept_scaling=1, class_weight=None, verbose=0, random_state=None, max_iter=1000)
 - penalty 
     - l1 - lasso - absolute values of parameters, which can bring some parameters to 0 
     - l2 - ridge - squared values of parameters, all parameters are shrinked by the same value
@@ -59,6 +58,53 @@ intercept_scaling=1, class_weight=None, verbose=0, random_state=None, max_iter=1
 - SVMs do not directly provide probability estimates, these are calculated using an expensive five-fold cross-validation 
 
 ### Logistic regression
+
+### K Nearest Neighbours
+KNN can be used for both regression and classification. 
+KNN tries to predict the correct class for the test data by calculating the distance between the test data and all the training points. Then select the K number of points which is closet to the test data. The KNN algorithm calculates the probability of the test data belonging to the classes of ‘K’ training data and class holds the highest probability will be selected. In the case of regression, the value is the mean of the ‘K’ selected training points.
+#### Algorithm
+1. Select the number K of the neighbors
+2. Calculate the Euclidean distance of K number of neighbors
+3. Take the K nearest neighbors as per the calculated Euclidean distance.
+4. Among these k neighbors, count the number of the data points in each category.
+5. Assign the new data points to that category for which the number of the neighbor is maximum.
+6. Our model is ready.
+#### Hyperparameters
+- numer of neighbours
+- distance metric
+    - Euclidean Distance: Euclidean distance is calculated as the square root of the sum of the squared differences between a new point (x) and an existing point (y).
+    - Manhattan Distance: This is the distance between real vectors using the sum of their absolute difference.
+    - Hamming Distance: It is used for categorical variables. If the value (x) and the value (y) are the same, the distance D will be equal to 0 . Otherwise D=1.
+- algorithm
+    - auto - decide
+    - Ball Tree - clusters of clusters, new points distance is calculated with centroids
+    - KDTree - rearange dataset to tree to speed calculations
+    - brute force -standard, calculate distance of point to all point in neibourhood
+- leaf size 
+    - Leaf size passed to BallTree or KDTree. This can affect the speed of the construction and query, as well as the memory required to store the tree. The optimal value depends on the nature of the problem.
+    - deafult 30
+- p 
+    - Power parameter for the Minkowski metric. When p = 1, this is equivalent to using manhattan_distance (l1), and euclidean_distance (l2) for p = 2. For arbitrary p, minkowski_distance (l_p) is used.
+- weights
+    - uniform : uniform weights. All points in each neighborhood are weighted equally
+    - distance : weight points by the inverse of their distance. in this case, closer neighbors of a query point will have a greater influence than neighbors which are further away
+
+#### PROS
+- K-NN is pretty intuitive and simple 
+- K-NN has no assumptions: K-NN is a non-parametric algorithm which means there are assumptions to be met
+ -No Training Step: K-NN does not explicitly build any model, it simply tags the new data entry based learning from historical data. New data entry would be tagged with majority class in the nearest neighbor.
+ - It constantly evolves: Given it’s an instance-based learning; k-NN is a memory-based approach. The classifier immediately adapts as we collect new training data. It allows the algorithm to respond quickly to changes in the input during real-time use.
+ - Very easy to implement for multi-class problem: Most of the classifier algorithms are easy to implement for binary problems and needs effort to implement for multi class whereas K-NN adjust to multi class without any extra efforts.
+ - Can be used both for Classification and Regression: One of the biggest advantages of K-NN is that K-NN can be used both for classification and regression problems.
+
+#### CONS
+- K-NN slow algorithm
+- Curse of Dimensionality: KNN works well with small number of input variables but as the numbers of variables grow K-NN algorithm struggles to predict the output of new data point.
+- K-NN needs homogeneous features: If you decide to build k-NN using a common distance, like Euclidean or Manhattan distances, it is completely necessary that features have the same scale, since absolute differences in features weight the same
+- Optimal number of neighbors: One of the biggest issues with K-NN is to choose the optimal number of neighbors to be consider while classifying the new data entry.
+- Imbalanced data causes problems: k-NN doesn’t perform well on imbalanced data. If we consider two classes, A and B, and the majority of the training data is labeled as A, then the model will ultimately give a lot of preference to A. This might result in getting the less common class B wrongly classified.
+- Outlier sensitivity: K-NN algorithm is very sensitive to outliers as it simply chose the neighbors based on distance criteria.
+- Missing Value treatment: K-NN inherently has no capability of dealing with missing value problem.
 
 ### Tress based:
 #### Decision tree
@@ -143,7 +189,7 @@ for sklearn.ensemble.RandomForestClassifier
 - criterion, max depth, min samples split, min_samples_leaf, min_weight_fraction_leaf, max_features, max_leaf_nodes, min_impurity_decrease, class_weight, ccp_alpha
     - like in decision trees
 
- ##### PROS
+ #### PROS
 - unlikely to overfit data
 - no need for normalisation, scaling, deleting outliers
 - fit to nonlinear problems
