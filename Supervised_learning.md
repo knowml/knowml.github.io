@@ -1,10 +1,39 @@
 # Supervised Learning
 
 ## Regression
+### Evaluation
+- AuPRC: The area under the precision-recall (PR) curve, also referred to as average precision. This value ranges from zero to one, where a higher value indicates a higher-quality model.
+- AuROC: The area under receiver operating characteristic curve. This ranges from zero to one, where a higher value indicates a higher-quality model.
+- Log loss: The cross-entropy between the model predictions and the target values. This ranges from zero to infinity, where a lower value indicates a higher-quality model.
+- Confidence threshold: A confidence score that determines which predictions to return. A model returns predictions that are at this value or higher. A higher confidence threshold increases precision but lowers recall. Vertex AI returns confidence metrics at different threshold values to show how the threshold affects precision and recall.
+- Recall: The fraction of predictions with this class that the model correctly predicted. Also called true positive rate.
+- Recall at 1: The recall (true positive rate) when only considering the label that has the highest prediction score and not below the confidence threshold for each example.
+- Precision: The fraction of classification predictions produced by the model that were correct.
+- Precision at 1: The precision when only considering the label that has the highest prediction score and not below the confidence threshold for each example.
+- F1 score: The harmonic mean of precision and recall. F1 is a useful metric if you're looking for a balance between precision and recall and there's an uneven class distribution.
+- F1 score at 1: The harmonic mean of recall at 1 and precision at 1.
+- True negative count: The number of times a model correctly predicted a negative class.
+- True positive count: The number of times a model correctly predicted a positive class.
+- False negative count: The number of times a model mistakenly predicted a negative class.
+- False positive count: The number of times a model mistakenly predicted a positive class.
+- False positive rate: The fraction of incorrectly predicted results out of all predicted results.
+- False positive rate at 1: The false positive rate when only considering the label that has the highest prediction score and not below the confidence threshold for each example.
+- Confusion matrix: A confusion matrix shows how often a model correctly predicted a result. For incorrectly predicted results, the matrix shows what the model predicted instead. The confusion matrix helps you understand where your model is "confusing" two results.
+- Model feature attributions: Vertex AI shows you how much each feature impacts a model. The values are provided as a percentage for each feature: the higher the percentage, the more strongly that feature impacted model training. Review this information to ensure that all of the most important features make sense for your data and business problem.
+
 ### Linear regression
 ### Decision trees for regression
 
 ## Classification
+### Evaluation
+- MAE: The mean absolute error (MAE) is the average absolute difference between the target values and the predicted values. This metric ranges from zero to infinity; a lower value indicates a higher quality model.
+- RMSE: The root-mean-squared error is the square root of the average squared difference between the target and predicted values. RMSE is more sensitive to outliers than MAE,so if you're concerned about large errors, then RMSE can be a more useful metric to evaluate. Similar to MAE, a smaller value indicates a higher quality model (0 represents a perfect predictor).
+- RMSLE: The root-mean-squared logarithmic error metric is similar to RMSE, except that it uses the natural logarithm of the predicted and actual values plus 1. RMSLE penalizes under-prediction more heavily than over-prediction. It can also be a good metric when you don't want to penalize differences for large prediction values more heavily than for small prediction values. This metric ranges from zero to infinity; a lower value indicates a higher quality model. The RMSLE evaluation metric is returned only if all label and predicted values are non-negative.
+- r^2: r squared (r^2) is the square of the Pearson correlation coefficient between the labels and predicted values. This metric ranges between zero and one; a higher value indicates a higher quality model.
+- MAPE: Mean absolute percentage error (MAPE) is the average absolute percentage difference between the labels and the predicted values. This metric ranges between zero and infinity; a lower value indicates a higher quality model.
+- MAPE is not shown if the target column contains any 0 values. In this case, MAPE is undefined.
+- Model feature attributions: Vertex AI shows you how much each feature impacts a model. The values are provided as a percentage for each feature: the higher the percentage, the more strongly that feature impacted model training. Review this information to ensure that all of the most important features make sense for your data and business problem.
+
 ### SVM 
 Support Vector Machine wants the smallest distance between data points and the decision boundary to be as large as possible. In other words, if you imagine the decision boundary as the central line of a street, SVM prefers an 8-line highway rather than a country road. The width of the street is called the margin.
 
@@ -122,7 +151,7 @@ The typical approach to remedy this is by pruning the tree to prevent overfittin
 for sklearn.tree.DecisionTreeClassifier
 - criterion 
     - Gini impurity = 1 - sum of (squared probability of samples belonging to class i at a given node - p^2) -> 0 for pure node, ~0.5 for super impure
-    - entropy/log_loss - Shannon information gain = sum of (- probability of samples belonging to class i at a given node x log2 of that probability) -> ~0 for invormative split, 1 for no information gain  
+    - entropy/log_loss - Shannon information gain = sum of (- probability of samples belonging to class i at a given node x log2 of that probability) -> ~0 for informative split, 1 for no information gain  
     - they are very similar, gini faster 
     - https://quantdare.com/decision-trees-gini-vs-entropy/ 
 - splitter
