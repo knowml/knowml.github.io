@@ -2,8 +2,19 @@
 
 ## Regression
 ### Evaluation
-- AuPRC: The area under the precision-recall (PR) curve, also referred to as average precision. This value ranges from zero to one, where a higher value indicates a higher-quality model.
-- AuROC: The area under receiver operating characteristic curve. This ranges from zero to one, where a higher value indicates a higher-quality model.
+- MAE: The mean absolute error (MAE) is the average absolute difference between the target values and the predicted values. This metric ranges from zero to infinity; a lower value indicates a higher quality model.
+- RMSE: The root-mean-squared error is the square root of the average squared difference between the target and predicted values. RMSE is more sensitive to outliers than MAE,so if you're concerned about large errors, then RMSE can be a more useful metric to evaluate. Similar to MAE, a smaller value indicates a higher quality model (0 represents a perfect predictor).
+- RMSLE: The root-mean-squared logarithmic error metric is similar to RMSE, except that it uses the natural logarithm of the predicted and actual values plus 1. RMSLE penalizes under-prediction more heavily than over-prediction. It can also be a good metric when you don't want to penalize differences for large prediction values more heavily than for small prediction values. This metric ranges from zero to infinity; a lower value indicates a higher quality model. The RMSLE evaluation metric is returned only if all label and predicted values are non-negative.
+- r^2: r squared (r^2) is the square of the Pearson correlation coefficient between the labels and predicted values. This metric ranges between zero and one; a higher value indicates a higher quality model.
+- MAPE: Mean absolute percentage error (MAPE) is the average absolute percentage difference between the labels and the predicted values. This metric ranges between zero and infinity; a lower value indicates a higher quality model.
+- MAPE is not shown if the target column contains any 0 values. In this case, MAPE is undefined.
+- Model feature attributions: Vertex AI shows you how much each feature impacts a model. The values are provided as a percentage for each feature: the higher the percentage, the more strongly that feature impacted model training. Review this information to ensure that all of the most important features make sense for your data and business problem.
+
+### Linear regression
+### Decision trees for regression
+
+## Classification
+### Evaluation
 - Log loss: The cross-entropy between the model predictions and the target values. This ranges from zero to infinity, where a lower value indicates a higher-quality model.
 - Confidence threshold: A confidence score that determines which predictions to return. A model returns predictions that are at this value or higher. A higher confidence threshold increases precision but lowers recall. Vertex AI returns confidence metrics at different threshold values to show how the threshold affects precision and recall.
 - Recall: The fraction of predictions with this class that the model correctly predicted. Also called true positive rate.
@@ -19,19 +30,6 @@
 - False positive rate: The fraction of incorrectly predicted results out of all predicted results.
 - False positive rate at 1: The false positive rate when only considering the label that has the highest prediction score and not below the confidence threshold for each example.
 - Confusion matrix: A confusion matrix shows how often a model correctly predicted a result. For incorrectly predicted results, the matrix shows what the model predicted instead. The confusion matrix helps you understand where your model is "confusing" two results.
-- Model feature attributions: Vertex AI shows you how much each feature impacts a model. The values are provided as a percentage for each feature: the higher the percentage, the more strongly that feature impacted model training. Review this information to ensure that all of the most important features make sense for your data and business problem.
-
-### Linear regression
-### Decision trees for regression
-
-## Classification
-### Evaluation
-- MAE: The mean absolute error (MAE) is the average absolute difference between the target values and the predicted values. This metric ranges from zero to infinity; a lower value indicates a higher quality model.
-- RMSE: The root-mean-squared error is the square root of the average squared difference between the target and predicted values. RMSE is more sensitive to outliers than MAE,so if you're concerned about large errors, then RMSE can be a more useful metric to evaluate. Similar to MAE, a smaller value indicates a higher quality model (0 represents a perfect predictor).
-- RMSLE: The root-mean-squared logarithmic error metric is similar to RMSE, except that it uses the natural logarithm of the predicted and actual values plus 1. RMSLE penalizes under-prediction more heavily than over-prediction. It can also be a good metric when you don't want to penalize differences for large prediction values more heavily than for small prediction values. This metric ranges from zero to infinity; a lower value indicates a higher quality model. The RMSLE evaluation metric is returned only if all label and predicted values are non-negative.
-- r^2: r squared (r^2) is the square of the Pearson correlation coefficient between the labels and predicted values. This metric ranges between zero and one; a higher value indicates a higher quality model.
-- MAPE: Mean absolute percentage error (MAPE) is the average absolute percentage difference between the labels and the predicted values. This metric ranges between zero and infinity; a lower value indicates a higher quality model.
-- MAPE is not shown if the target column contains any 0 values. In this case, MAPE is undefined.
 - Model feature attributions: Vertex AI shows you how much each feature impacts a model. The values are provided as a percentage for each feature: the higher the percentage, the more strongly that feature impacted model training. Review this information to ensure that all of the most important features make sense for your data and business problem.
 
 ### SVM 
@@ -135,7 +133,7 @@ KNN tries to predict the correct class for the test data by calculating the dist
 - Outlier sensitivity: K-NN algorithm is very sensitive to outliers as it simply chose the neighbors based on distance criteria.
 - Missing Value treatment: K-NN inherently has no capability of dealing with missing value problem.
 
-### Tress based:
+### Tree based
 #### Decision tree
 Decision Trees is a type of model which breaks down the given input data through decision, based on the features we train the model and their values. 
 Training part is respnsible for finding questions (features and split values) that best separate training data into target classes. 
@@ -237,7 +235,7 @@ Grow trees that are not complex. All the trees are connected in series and each 
 1. Calculate log(odds) for target = 1 as a initial prediction for all  - Logistic Regression equivalent of average
     - odds - number of 1 / number of 0
 2. Convert it to probability by applying to logistic function - e ^ log(odds) / 1 + e^ log(odds) 
-3. Calculate Pseudo-Residuals
+3. Compare prediction with true value - calculate Pseudo-Residuals
     - (1 - probability) for observation with true target 1 
     - (0 - probability) for observation with true target 0
 4. Build a small, simple tree using features and as a target value use Pseudo-Residuals
@@ -250,6 +248,7 @@ Grow trees that are not complex. All the trees are connected in series and each 
     - convert to probability - logistic function
     - calculate pseudo - residual 
 
+Explained in [statquest](https://www.youtube.com/watch?v=jxuNLH5dXCs)
 
 #### Hyperparameters
 - number of leaves (usually between 8 and 32) 
@@ -268,11 +267,13 @@ XGBoost advantages:
 - Parallel Processing
 - High Flexibility
 - Handling Missing Values
-- Tree Pruning:
+- Tree Pruning
 - Built-in Cross-Validation
 - Continue on Existing Model
 
 ##### Algorithm
+
+Gradient boosting is an approach where new models are created that predict the residuals or errors of prior models and then added together to make the final prediction. It is called gradient boosting because it uses a gradient descent algorithm to minimize the loss when adding new models.
 
 ###### General Parameters
 These define the overall functionality of XGBoost.
